@@ -18,6 +18,8 @@ let package = Package(
     )
   ],
   dependencies: [
+    .package(url: "https://source.skip.tools/skip.git", from: "0.8.50"),
+        .package(url: "https://source.skip.tools/skip-ui.git", from: "0.0.0"),
     .package(url: "https://github.com/gonzalezreal/NetworkImage", from: "6.0.0"),
     .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", from: "1.10.0"),
   ],
@@ -28,7 +30,7 @@ let package = Package(
       dependencies: [
         "cmark-gfm",
         .product(name: "NetworkImage", package: "NetworkImage"),
-      ]
+      ], plugins: [.plugin(name: "skipstone", package: "skip")]
     ),
     .testTarget(
       name: "MarkdownUITests",
@@ -36,7 +38,7 @@ let package = Package(
         "MarkdownUI",
         .product(name: "SnapshotTesting", package: "swift-snapshot-testing"),
       ],
-      exclude: ["__Snapshots__"]
+      exclude: ["__Snapshots__"], plugins: [.plugin(name: "skipstone", package: "skip")]
     ),
   ]
 )
